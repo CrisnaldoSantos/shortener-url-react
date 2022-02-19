@@ -9,7 +9,7 @@ export function Analytcs() {
         fluid
         className="d-flex flex-column justify-content-center align-items-center w-100 mt-5"
       >
-        <h1>Analytcs</h1>
+        <h3>Top 100 urls acessadas</h3>
         <AnalyticsTable />
       </Container>
     </PageContainer>

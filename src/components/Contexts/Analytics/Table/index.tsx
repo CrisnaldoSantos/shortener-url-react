@@ -1,34 +1,43 @@
+import { useEffect } from 'react';
 import { Table } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'store';
+import { getAnalytics } from 'store/url/url.ducks';
 
+export interface AnalyticData {
+  _id: string;
+  user_fk: string;
+  hits: number;
+  destinationUrl: string;
+  shortUrl: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
 export function AnalyticsTable() {
+  const { analyticsUrls } = useSelector((state: RootState) => state.url);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAnalytics());
+  }, [dispatch]);
+
   return (
     <Table striped bordered hover responsive variant="light">
       <thead>
         <tr>
-          <th>#</th>
+          <th>Top</th>
           <th>Url</th>
           <th>Total de Acessos</th>
-          <th>Username</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td colSpan={2}>Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
+        {analyticsUrls.map((url: AnalyticData, index) => (
+          <tr>
+            <td>{index + 1}</td>
+            <td>{url.shortUrl}</td>
+            <td>{url.hits}</td>
+          </tr>
+        ))}
       </tbody>
     </Table>
   );
