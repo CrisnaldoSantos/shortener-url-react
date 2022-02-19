@@ -5,9 +5,11 @@ import {
   Button,
   Navbar as NavbarRB,
 } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import { Logo } from '../Logo';
 
 export function Navbar() {
+  const navigate = useNavigate();
   return (
     <NavbarRB bg="light" expand="lg" className="shadow p-3 mb-1 rounded">
       <Container fluid>
@@ -25,10 +27,19 @@ export function Navbar() {
             <Nav.Link href="#">Minhas Urls</Nav.Link>
           </Nav>
           <Form className="d-flex">
-            <Button variant="outline-primary" className="mx-2">
+            <Button
+              variant="outline-primary"
+              className="mx-2"
+              onClick={() => navigate('/login')}
+            >
               Entrar
             </Button>
-            <Button variant="outline-secondary">Registrar</Button>
+            <Button
+              variant="outline-secondary"
+              onClick={() => navigate('/register')}
+            >
+              Registrar
+            </Button>
           </Form>
         </NavbarRB.Collapse>
       </Container>

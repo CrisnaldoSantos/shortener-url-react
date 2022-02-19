@@ -19,7 +19,6 @@ export function Shortener() {
             type="text"
             placeholder="Insira a URL a ser encurtada"
             size="lg"
-            error={{ type: '', message: 'errado aqui' }}
           />
           <LineButton type="submit" size="lg">
             Encurtar

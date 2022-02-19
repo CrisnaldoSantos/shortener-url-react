@@ -7,22 +7,19 @@ interface InputProps extends FormControlProps {
   name: string;
   label?: string;
   error?: FieldError;
-  passwordInput?: boolean;
 }
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-  {
-    name,
-    label,
-    error = undefined,
-    passwordInput = false,
-    ...rest
-  }: InputProps,
+  { name, label, error = undefined, ...rest }: InputProps,
   ref
 ) => {
   return (
     <Form.Group className="mb-3" controlId={`${name}.ControlInput`}>
-      {!!label && <Form.Label htmlFor={name}>{label}</Form.Label>}
+      {!!label && (
+        <Form.Label htmlFor={name} className="fs-6 fw-bold text-secondary">
+          {label}
+        </Form.Label>
+      )}
       <Form.Control
         id={name}
         {...rest}
