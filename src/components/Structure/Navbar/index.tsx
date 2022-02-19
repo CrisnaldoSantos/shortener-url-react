@@ -5,13 +5,14 @@ import {
   Button,
   Navbar as NavbarRB,
 } from 'react-bootstrap';
+import { Logo } from '../Logo';
 
 export function Navbar() {
   return (
     <NavbarRB bg="light" expand="lg" className="shadow p-3 mb-1 rounded">
       <Container fluid>
-        <NavbarRB.Brand href="#" className="mr-5 text-primary fw-bold">
-          SuaShortener
+        <NavbarRB.Brand href="#" className="mr-5">
+          <Logo />
         </NavbarRB.Brand>
         <NavbarRB.Toggle aria-controls="navbarScroll" />
         <NavbarRB.Collapse id="navbarScroll">
