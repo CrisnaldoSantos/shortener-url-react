@@ -15,7 +15,8 @@
             "jsx": true
         },
         "ecmaVersion": 12,
-        "sourceType": "module"
+        "sourceType": "module",
+        "project": ["./tsconfig.json"]
     },
     "plugins": [
         "react",
@@ -29,8 +30,13 @@
         "react-hooks/exhaustive-deps": "warn",
         "react/jsx-filename-extension": [ 1, {"extensions": [".tsx"]} ],
         "import/prefer-default-export": "off",
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-no-useless-fragment":"off",
+        "react/require-default-props": "off",
+        "react/jsx-props-no-spreading":"off",
+        "react/function-component-definition":"off",
         "@typescript-eslint/explicit-function-return-type": [
-          "error",
+          "off",
           {
             "allowExpressions": true
           }
