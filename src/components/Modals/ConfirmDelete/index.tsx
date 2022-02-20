@@ -1,14 +1,20 @@
 import { Modal, Button } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { deleteUserUrl } from 'store/url/url.ducks';
 
 interface ModalConfirmDeleteProps {
   isOpen: boolean;
   onClose: () => void;
+  id: string;
 }
 
 export function ModalConfirmDelete({
   isOpen,
   onClose,
+  id,
 }: ModalConfirmDeleteProps) {
+  const dispatch = useDispatch();
+
   return (
     <Modal show={isOpen} onHide={onClose}>
       <Modal.Header closeButton>
@@ -19,7 +25,7 @@ export function ModalConfirmDelete({
         <Button variant="secondary" onClick={onClose}>
           Cancelar
         </Button>
-        <Button variant="primary" onClick={onClose}>
+        <Button variant="primary" onClick={() => dispatch(deleteUserUrl(id))}>
           Confirmar
         </Button>
       </Modal.Footer>

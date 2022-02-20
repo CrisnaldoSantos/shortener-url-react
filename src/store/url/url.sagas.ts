@@ -6,12 +6,14 @@ import { ActionType, ResponseGenerator } from 'store/responseTypes';
 import { errorToast, successToast } from 'utils/toasts';
 
 import {
+  deleteUserUrl,
   getAnalytics,
   getAnalyticsSuccess,
   getUserUrls,
   getUserUrlsSuccess,
   setUrl,
   setUrlSuccess,
+  setUserModalDelete,
 } from './url.ducks';
 
 export function* getListAnalytics() {
@@ -55,8 +57,27 @@ export function* getListUserUrls() {
   }
 }
 
+export function* destroyUser({ payload }: ActionType) {
+  yield put({ type: startLoading.type });
+  try {
+    yield api.delete(`${URL}/${payload}`);
+    successToast('URL deletada com sucesso!');
+    yield put({
+      type: getUserUrls.type,
+    });
+    yield put({
+      type: setUserModalDelete.type,
+      payload: false,
+    });
+    yield put({ type: stopLoading.type });
+  } catch (error) {
+    errorToast(`Erro ao deletar url! ${error}`);
+  }
+}
+
 export function* watchSagas() {
   yield takeEvery(getAnalytics.type, getListAnalytics);
   yield takeLatest(setUrl.type, createShortUrl);
   yield takeLatest(getUserUrls.type, getListUserUrls);
+  yield takeLatest(deleteUserUrl.type, destroyUser);
 }
