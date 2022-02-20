@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { PageContainer } from 'containers/PageContainer';
 import { Container, Form, Image } from 'react-bootstrap';
 import shortImg from 'assets/short-url.svg';
@@ -6,6 +7,10 @@ import { LineButton } from 'components/Form/Button/LineButton';
 import { Input } from 'components/Form/Input';
 import { SubmitHandler, useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { getUserData } from 'utils/dataStorage';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUrl } from 'store/url/url.ducks';
+import { RootState } from 'store';
 import {
   defaultShortenerValues,
   shortenerValidationSchema,
@@ -17,7 +22,6 @@ type UrlFormData = {
 
 export function Shortener() {
   const {
-    register,
     handleSubmit,
     control,
     reset,
@@ -27,8 +31,15 @@ export function Shortener() {
     defaultValues: defaultShortenerValues,
   });
 
+  const dispatch = useDispatch();
+  const { urlResponse } = useSelector((state: RootState) => state.url);
   const handleSave: SubmitHandler<UrlFormData> = (data) => {
-    console.log(data);
+    const user = getUserData();
+    const shortUrlData = {
+      destinationUrl: data.url,
+      user_fk: user.userId,
+    };
+    dispatch(setUrl(shortUrlData));
     reset(defaultShortenerValues);
   };
 
@@ -60,7 +71,7 @@ export function Shortener() {
             Encurtar
           </LineButton>
         </Form>
-        <UrlResult url="" />
+        <UrlResult url={urlResponse} />
       </Container>
     </PageContainer>
   );

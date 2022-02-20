@@ -1,9 +1,9 @@
 import { AsyncComponent } from 'components/Structure/AsyncComponent';
 import { useEffect } from 'react';
-import { Table } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
-import { getAnalytics } from 'store/url/url.ducks';
+import { getUserUrls } from 'store/url/url.ducks';
 
 export interface AnalyticData {
   _id: string;
@@ -14,13 +14,13 @@ export interface AnalyticData {
   createdAt: Date;
   updatedAt: Date;
 }
-export function AnalyticsTable() {
-  const { analyticsUrls } = useSelector((state: RootState) => state.url);
+export function MyUrlsTable() {
+  const { userUrls } = useSelector((state: RootState) => state.url);
   const { loading } = useSelector((state: RootState) => state.loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAnalytics());
+    dispatch(getUserUrls());
   }, [dispatch]);
 
   const prefix = process.env.REACT_APP_API_BASE_PATH;
@@ -32,14 +32,18 @@ export function AnalyticsTable() {
             <th>Top</th>
             <th>Url</th>
             <th>Total de Acessos</th>
+            <th> </th>
           </tr>
         </thead>
         <tbody>
-          {analyticsUrls.map((url: AnalyticData, index) => (
+          {userUrls.map((url: AnalyticData, index) => (
             <tr key={url.shortUrl}>
               <td>{index + 1}</td>
               <td>{`${prefix}/${url.shortUrl}`}</td>
               <td>{url.hits}</td>
+              <td>
+                <Button variant="danger">x</Button>
+              </td>
             </tr>
           ))}
         </tbody>

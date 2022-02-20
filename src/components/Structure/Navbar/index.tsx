@@ -1,22 +1,19 @@
-import {
-  Container,
-  Nav,
-  Form,
-  Button,
-  Navbar as NavbarRB,
-} from 'react-bootstrap';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Container, Nav, Navbar as NavbarRB } from 'react-bootstrap';
+import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
+import { AuthButton } from '../AuthButton';
 import { Logo } from '../Logo';
 import { NavLink } from '../NavLink';
 
 export function Navbar() {
-  const navigate = useNavigate();
   const { pathname } = useLocation();
+  const { loginSuccess } = useSelector((state: RootState) => state.auth);
 
   return (
     <NavbarRB bg="light" expand="lg" className="shadow p-3 mb-1 rounded">
       <Container fluid>
-        <NavbarRB.Brand href="#" className="mr-5">
+        <NavbarRB.Brand className="mr-5">
           <Logo />
         </NavbarRB.Brand>
         <NavbarRB.Toggle aria-controls="navbarScroll" />
@@ -29,24 +26,13 @@ export function Navbar() {
             <NavLink url="/analytics" pathname={pathname}>
               Análise
             </NavLink>
-
-            <Nav.Link href="#">Minhas Urls</Nav.Link>
+            {loginSuccess && (
+              <NavLink url="/myurls" pathname={pathname}>
+                Minhas Urls
+              </NavLink>
+            )}
           </Nav>
-          <Form className="d-flex">
-            <Button
-              variant="outline-primary"
-              className="mx-2"
-              onClick={() => navigate('/login')}
-            >
-              Entrar
-            </Button>
-            <Button
-              variant="outline-secondary"
-              onClick={() => navigate('/register')}
-            >
-              Registrar
-            </Button>
-          </Form>
+          <AuthButton />
         </NavbarRB.Collapse>
       </Container>
     </NavbarRB>

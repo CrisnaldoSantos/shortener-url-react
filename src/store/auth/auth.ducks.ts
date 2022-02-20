@@ -3,20 +3,15 @@ import { createAction, createReducer } from '@reduxjs/toolkit';
 const INITIAL_STATE = {
   loginSuccess: false,
   user: {
-    id: 0,
-    firstName: '',
-    lastName: '',
+    _id: null,
     email: '',
-    document: '',
-    password: '',
-    role: '',
   },
 };
 
 export const login = createAction<object>('LOGIN');
 export const loginSuccess = createAction('LOGIN_SUCCESS');
 export const logout = createAction('LOGOUT');
-export const refreshData = createAction<number>('REFRESH_DATA');
+export const refreshData = createAction<object>('REFRESH_DATA');
 export const setAuthUser = createAction('SET_AUTH_USER');
 
 export default createReducer(INITIAL_STATE, {

@@ -20,7 +20,12 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
           {label}
         </Form.Label>
       )}
-      <Form.Control id={name} {...rest} isInvalid={error !== undefined} />
+      <Form.Control
+        id={name}
+        {...rest}
+        ref={ref}
+        isInvalid={error !== undefined}
+      />
       {!!error && (
         <Form.Text className="mx-1 text-danger fs-6">{error.message}</Form.Text>
       )}
