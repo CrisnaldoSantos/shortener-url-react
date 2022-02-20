@@ -14,18 +14,13 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   ref
 ) => {
   return (
-    <Form.Group className="mb-3" controlId={`${name}.ControlInput`}>
+    <Form.Group className="mb-3">
       {!!label && (
         <Form.Label htmlFor={name} className="fs-6 fw-bold text-secondary">
           {label}
         </Form.Label>
       )}
-      <Form.Control
-        id={name}
-        {...rest}
-        ref={ref}
-        isInvalid={error !== undefined}
-      />
+      <Form.Control id={name} {...rest} isInvalid={error !== undefined} />
       {!!error && (
         <Form.Text className="mx-1 text-danger fs-6">{error.message}</Form.Text>
       )}

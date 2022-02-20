@@ -1,6 +1,6 @@
 import { AnalyticsTable } from 'components/Contexts/Analytics/Table';
 import { PageContainer } from 'containers/PageContainer';
-import { Container } from 'react-bootstrap';
+import { Container, Form } from 'react-bootstrap';
 
 export function Analytcs() {
   return (
@@ -9,7 +9,9 @@ export function Analytcs() {
         fluid
         className="d-flex flex-column justify-content-center align-items-center w-100 mt-5"
       >
-        <h3>Top 100 urls acessadas</h3>
+        <Form.Text className="text-dark fs-2 mb-4 ">
+          Top 100 urls acessadas
+        </Form.Text>
         <AnalyticsTable />
       </Container>
     </PageContainer>

@@ -5,11 +5,14 @@ import {
   Button,
   Navbar as NavbarRB,
 } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Logo } from '../Logo';
+import { NavLink } from '../NavLink';
 
 export function Navbar() {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
   return (
     <NavbarRB bg="light" expand="lg" className="shadow p-3 mb-1 rounded">
       <Container fluid>
@@ -19,10 +22,13 @@ export function Navbar() {
         <NavbarRB.Toggle aria-controls="navbarScroll" />
         <NavbarRB.Collapse id="navbarScroll">
           <Nav className="me-auto my-2 my-lg-0" navbarScroll>
-            <Nav.Link href="/" color="success">
+            <NavLink url="/" pathname={pathname}>
               Encurtador
-            </Nav.Link>
-            <Nav.Link href="#action2">Análise</Nav.Link>
+            </NavLink>
+
+            <NavLink url="/analytics" pathname={pathname}>
+              Análise
+            </NavLink>
 
             <Nav.Link href="#">Minhas Urls</Nav.Link>
           </Nav>

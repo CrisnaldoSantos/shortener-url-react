@@ -1,3 +1,4 @@
+import { AsyncComponent } from 'components/Structure/AsyncComponent';
 import { useEffect } from 'react';
 import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,30 +16,34 @@ export interface AnalyticData {
 }
 export function AnalyticsTable() {
   const { analyticsUrls } = useSelector((state: RootState) => state.url);
+  const { loading } = useSelector((state: RootState) => state.loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAnalytics());
   }, [dispatch]);
 
+  const prefix = process.env.REACT_APP_API_BASE_PATH;
   return (
-    <Table striped bordered hover responsive variant="light">
-      <thead>
-        <tr>
-          <th>Top</th>
-          <th>Url</th>
-          <th>Total de Acessos</th>
-        </tr>
-      </thead>
-      <tbody>
-        {analyticsUrls.map((url: AnalyticData, index) => (
+    <AsyncComponent loading={loading === 1}>
+      <Table striped bordered hover responsive variant="white">
+        <thead>
           <tr>
-            <td>{index + 1}</td>
-            <td>{url.shortUrl}</td>
-            <td>{url.hits}</td>
+            <th>Top</th>
+            <th>Url</th>
+            <th>Total de Acessos</th>
           </tr>
-        ))}
-      </tbody>
-    </Table>
+        </thead>
+        <tbody>
+          {analyticsUrls.map((url: AnalyticData, index) => (
+            <tr>
+              <td>{index + 1}</td>
+              <td>{`${prefix}/${url.shortUrl}`}</td>
+              <td>{url.hits}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </AsyncComponent>
   );
 }
