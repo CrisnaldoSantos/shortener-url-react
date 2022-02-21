@@ -1,5 +1,5 @@
 import { put, takeEvery, takeLatest } from 'redux-saga/effects';
-import { AUTH, USER } from 'constants/endpoints';
+import { AUTH } from 'constants/endpoints';
 import { startLoading, stopLoading } from 'store/loading/loading.ducks';
 import { api } from 'services/api';
 import { ActionType, ResponseGenerator } from 'store/responseTypes';
