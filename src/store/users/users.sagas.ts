@@ -4,6 +4,9 @@ import { startLoading, stopLoading } from 'store/loading/loading.ducks';
 import { api } from 'services/api';
 import { ActionType } from 'store/responseTypes';
 import { errorToast, successToast } from 'utils/toasts';
+import { normalizeError } from 'utils/normalizeErrors';
+import { AxiosError } from 'axios';
+import { catchAxiosErrors } from 'utils/catchAxiosErrors';
 import { createUser, createUserSuccess } from './users.ducks';
 
 export function* createNewUser({ payload }: ActionType) {
@@ -18,7 +21,8 @@ export function* createNewUser({ payload }: ActionType) {
     });
     yield put({ type: stopLoading.type });
   } catch (error) {
-    errorToast(`Erro ao criar usuário! ${error}`);
+    const err = error as AxiosError;
+    catchAxiosErrors(err, 'Erro ao criar usuário!');
     yield put({ type: stopLoading.type });
   }
 }

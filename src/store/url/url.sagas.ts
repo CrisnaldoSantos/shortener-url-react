@@ -52,7 +52,8 @@ export function* getListUserUrls() {
     yield put({ type: stopLoading.type });
   } catch (error) {
     yield put({ type: stopLoading.type });
-
+    localStorage.clear();
+    window.location.replace('/');
     errorToast(`Erro ao carregar Analytics! : ${error}`);
   }
 }
@@ -71,6 +72,8 @@ export function* destroyUser({ payload }: ActionType) {
     });
     yield put({ type: stopLoading.type });
   } catch (error) {
+    localStorage.clear();
+    window.location.replace('/');
     errorToast(`Erro ao deletar url! ${error}`);
   }
 }
