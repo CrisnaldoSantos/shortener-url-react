@@ -3,8 +3,10 @@ import { URL_ANALYTICS, URL, URL_USER } from 'constants/endpoints';
 import { startLoading, stopLoading } from 'store/loading/loading.ducks';
 import { api } from 'services/api';
 import { ActionType, ResponseGenerator } from 'store/responseTypes';
-import { errorToast, successToast } from 'utils/toasts';
+import { successToast } from 'utils/toasts';
 
+import { AxiosError } from 'axios';
+import { catchAxiosErrors } from 'utils/catchAxiosErrors';
 import {
   deleteUserUrl,
   getAnalytics,
@@ -25,8 +27,8 @@ export function* getListAnalytics() {
     yield put({ type: stopLoading.type });
   } catch (error) {
     yield put({ type: stopLoading.type });
-
-    errorToast(`Erro ao carregar Analytics! : ${error}`);
+    const err = error as AxiosError;
+    catchAxiosErrors(err, 'Erro ao carregar Analytics!');
   }
 }
 
@@ -39,8 +41,8 @@ export function* createShortUrl({ payload }: ActionType) {
     successToast('Url gerada com sucesso!');
   } catch (error) {
     yield put({ type: stopLoading.type });
-
-    errorToast(`Erro ao criar url! : ${error}`);
+    const err = error as AxiosError;
+    catchAxiosErrors(err, 'Erro ao criar url!');
   }
 }
 
@@ -52,9 +54,8 @@ export function* getListUserUrls() {
     yield put({ type: stopLoading.type });
   } catch (error) {
     yield put({ type: stopLoading.type });
-    localStorage.clear();
-    window.location.replace('/');
-    errorToast(`Erro ao carregar Analytics! : ${error}`);
+    const err = error as AxiosError;
+    catchAxiosErrors(err, 'Erro ao carregar urls do usuário!');
   }
 }
 
@@ -72,9 +73,9 @@ export function* destroyUser({ payload }: ActionType) {
     });
     yield put({ type: stopLoading.type });
   } catch (error) {
-    localStorage.clear();
-    window.location.replace('/');
-    errorToast(`Erro ao deletar url! ${error}`);
+    yield put({ type: stopLoading.type });
+    const err = error as AxiosError;
+    catchAxiosErrors(err, 'Erro ao deletar url!');
   }
 }
 

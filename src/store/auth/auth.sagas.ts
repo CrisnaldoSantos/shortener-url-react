@@ -6,6 +6,8 @@ import { ActionType, ResponseGenerator } from 'store/responseTypes';
 import { errorToast } from 'utils/toasts';
 import { setAccessToken } from 'utils/dataStorage';
 
+import { catchAxiosErrors } from 'utils/catchAxiosErrors';
+import { AxiosError } from 'axios';
 import {
   login,
   loginSuccess,
@@ -18,7 +20,7 @@ export function* signIn({ payload }: ActionType) {
   yield put({ type: startLoading.type });
   try {
     const response: ResponseGenerator = yield api.post(AUTH, payload);
-    console.log(response.data);
+
     const { _id, email } = response.data.user;
     setAccessToken({
       accessToken: response.data.access_token,
@@ -30,7 +32,8 @@ export function* signIn({ payload }: ActionType) {
     yield put({ type: stopLoading.type });
   } catch (error) {
     yield put({ type: stopLoading.type });
-    errorToast(`Usuário não autorizado! : ${error}`);
+    const err = error as AxiosError;
+    catchAxiosErrors(err, 'Usuário não autorizado!');
   }
 }
 
