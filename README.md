@@ -35,6 +35,8 @@ npm install
 
 Abra o projeto no seu editor de código na sua preferência, renomeie o arquivo ".env.example" para ".env" e insira a url da api. Para usar a homologação insira: https://suacr.herokuapp.com
 
+É possível rodar o servidor localmente seguindo as instruções apresentadas no reposiório do mesmo: <a href="https://github.com/CrisnaldoSantos/shortener-url-api" target="_blank">https://github.com/CrisnaldoSantos/shortener-url-api</a>
+
 ```js
 npm start
 ```
