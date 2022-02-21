@@ -18,6 +18,8 @@ jobs:
           REACT_APP_API_BASE_PATH: ${{ secrets.REACT_APP_API_BASE_PATH }}
         run: npm test
       - name: Build
+        env:
+          REACT_APP_API_BASE_PATH: ${{ secrets.REACT_APP_API_BASE_PATH }}
         run: npm run build
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v2
@@ -42,3 +44,4 @@ jobs:
           args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          REACT_APP_API_BASE_PATH: ${{ secrets.REACT_APP_API_BASE_PATH }}
