@@ -1,46 +1,51 @@
-# Getting Started with Create React App
+<h1 align="center">
+    <img src="./src/assets/short-url.svg" width="50px">
+    <br/>SuaShortener
+</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+  <a href="https://www.crisnaldocarvalho.com.br">
+    <img alt="Made by Crisnaldo" src="https://img.shields.io/badge/made%20by-Crisnaldo Carvalho-3182CE">
+  </a>
 
-## Available Scripts
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-3182CE">
+</p>
 
-In the project directory, you can run:
+## Descrição:
 
-### `npm start`
+<p>
+Front-end contruído em ReactJS que encurta URLs. É possível utilizar anonimamente ou criando uma conta na aplicação. Anonimamente é possível gerar URLs encurtadas e ter acesso a página de análise que retorna as 100 urls mais acessadas. Com a autenticação é possível visualizar uma nova aba denominada "Minhas Urls" pela qual é possivel ter acesso as urls geradas quando logado e excluí-las da aplicação.
+</p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+A aplicação conta com uma pipeline que a publica automaticamente no Firebase Hosting, e pode ser acessada em homologação através da url:
+<a href="https://suashotener.web.app/" target="_blank">https://suashotener.web.app/</a>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<p align="center">
+    <img src="./src/assets/readme/home.PNG">
+</p>
 
-### `npm test`
+## Instalação:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Após clonar o repositório, instale as dependências do projeto com os comandos abaixo via terminal:
 
-### `npm run build`
+```js
+cd shortener-url-react
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Abra o projeto no seu editor de código na sua preferência, renomeie o arquivo ".env.example" para ".env" e insira a url da api. Para usar a homologação insira: https://suacr.herokuapp.com
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```js
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Tenologias:
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- React JS
+- Typescript
+- React-Bootstrap
+- React Hook Form
+- Testing Library
+- ReduxJSToolkit
+- Redux Sagas
+- Firebase
