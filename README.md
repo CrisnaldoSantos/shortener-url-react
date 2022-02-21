@@ -17,7 +17,7 @@
 Front-end contruído em ReactJS que encurta URLs. É possível utilizar anonimamente ou criando uma conta na aplicação. Anonimamente é possível gerar URLs encurtadas e ter acesso a página de análise que retorna as 100 urls mais acessadas. Com a autenticação é possível visualizar uma nova aba denominada "Minhas Urls" pela qual é possivel ter acesso as urls geradas quando logado e excluí-las da aplicação.
 </p>
 
-A aplicação pode ser acessada em homologação através da url:
+A aplicação conta com uma pipeline que a publica automaticamente no Firebase Hosting, e pode ser acessada em homologação através da url:
 <a href="https://suashotener.web.app/" target="_blank">https://suashotener.web.app/</a>
 
 <p align="center">
