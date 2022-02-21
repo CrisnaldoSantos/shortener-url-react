@@ -15,6 +15,10 @@ export function ModalConfirmDelete({
 }: ModalConfirmDeleteProps) {
   const dispatch = useDispatch();
 
+  function handleConfirm() {
+    dispatch(deleteUserUrl(id));
+  }
+
   return (
     <Modal show={isOpen} onHide={onClose}>
       <Modal.Header closeButton>
@@ -25,7 +29,7 @@ export function ModalConfirmDelete({
         <Button variant="secondary" onClick={onClose}>
           Cancelar
         </Button>
-        <Button variant="primary" onClick={() => dispatch(deleteUserUrl(id))}>
+        <Button variant="primary" onClick={() => handleConfirm()}>
           Confirmar
         </Button>
       </Modal.Footer>
